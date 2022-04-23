@@ -1,3 +1,7 @@
+using Newtonsoft.Json;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +10,8 @@ using System.Runtime;
 
 public class TerrainGen : MonoBehaviour
 {
-    
     public int chunkSize = 15;
-    private Dictionary<string, Mesh> superposition = new  Dictionary<string, Mesh>();
+    private Dictionary<string, SuperPositionType> superposition = new  Dictionary<string, SuperPositionType>();
 
     private TerrainComponents[][] terrainComponents;
     private MeshFilter meshFilter;
@@ -18,18 +21,30 @@ public class TerrainGen : MonoBehaviour
 
     [SerializeField] private Mesh[] meshes;
 
+    private GameObject[][] tempGameobjects;
+
     void Start(){
 
         meshFilter = GetComponent<MeshFilter>();
-        InitializeDictionary();
+
+        //superposition = JsonConvert.DeserializeObject<Dictionary<string, SuperPositionType>>("/SuperPositionRegistry.json");
+
         InitializeChunk();
+
+        int netEntropy = 1;
+        while (netEntropy > 0){
+            netEntropy = 0;
+            CollapseWave();
+        }
+
+        CombineMeshes();
 
     }
 
     void InitializeChunk(){
 
         terrainComponents = new TerrainComponents[chunkSize][];
-        GameObject[][] tempGameobjects = new GameObject[chunkSize][];
+        tempGameobjects = new GameObject[chunkSize][];
 
         //set arrays
         for (int x = 0 ; x < terrainComponents.Length ;  x++){
@@ -43,20 +58,30 @@ public class TerrainGen : MonoBehaviour
 
                 //set terrainComponents and allow all possibilities
                 terrainComponents[x][y] = new TerrainComponents();
-                terrainComponents[x][y].subSuperposition = new Dictionary<string, Mesh>(superposition);
+                terrainComponents[x][y].subSuperposition = new Dictionary<string, SuperPositionType>(superposition);
             }
             
         }
-        //generate
-        for (int x = 0 ; x < terrainComponents.Length ;  x++){
 
-            for (int y = 0 ; y < terrainComponents[x].Length ;  y++){
 
-                CollapseWave(x,y);
-                
-            }
+    }
 
-        }
+    void CollapseWave(){
+
+        int x = 0;
+        int y = 0;
+
+        //load mesh randomly from possible states
+        string meshPath = terrainComponents[x][y].subSuperposition.ElementAt(rand.Next(0, terrainComponents[x][y].subSuperposition.Count)).Value.mesh;
+        terrainComponents[x][y].mesh = Resources.Load<Mesh>(meshPath);
+
+
+
+
+    }
+
+    void CombineMeshes(){
+
         //combine meshes to make compooter happi
 
         CombineInstance[] combine = new CombineInstance[chunkSize*chunkSize];
@@ -74,50 +99,6 @@ public class TerrainGen : MonoBehaviour
         }
         transform.GetComponent<MeshFilter>().mesh = new Mesh();
         transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
-
-
-    }
-    void InitializeDictionary(){
-
-        superposition.Add("flat", meshes[0]);
-        superposition.Add("medium", meshes[1]);
-        superposition.Add("tall", meshes[2]);
-
-    }
-
-    void CollapseWave(int x, int y){
-
-        terrainComponents[x][y].mesh = terrainComponents[x][y].subSuperposition.ElementAt(rand.Next(0, terrainComponents[x][y].subSuperposition.Count)).Value;
-
-        int xnew = Mathf.Clamp(x+1,0, chunkSize-1);
-        int ynew = Mathf.Clamp(y+1,0, chunkSize-1);
-
-        if (terrainComponents[x][y].mesh == superposition["flat"]){
-
-            if (terrainComponents[xnew][y].subSuperposition.ContainsKey("tall")){
-
-                terrainComponents[xnew][y].subSuperposition.Remove("tall");
-            }
-            if (terrainComponents[x][ynew].subSuperposition.ContainsKey("tall")){
-
-                terrainComponents[x][ynew].subSuperposition.Remove("tall");
-
-            }
-            
-
-        }
-        if (terrainComponents[x][y].mesh == superposition["tall"]){
-
-            if (terrainComponents[x][ynew].subSuperposition.ContainsKey("flat")){
-
-                terrainComponents[x][ynew].subSuperposition.Remove("flat");
-
-            }
-            if (terrainComponents[xnew][y].subSuperposition.ContainsKey("flat")){
-
-                terrainComponents[xnew][y].subSuperposition.Remove("flat");
-            }
-        }
 
     }
 

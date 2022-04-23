@@ -1,0 +1,64 @@
+{
+    "square":
+        {
+            "mesh" : "cube.fbx",
+            "faces" : [
+                [
+                    "flat",
+                    "flat",
+                    "flat",
+                    "flat"
+                ],
+                [
+                    "flat",
+                    "flat",
+                    "flat",
+                    "flat"
+                ],
+                [
+                    "flat",
+                    "flat",
+                    "flat",
+                    "flat"
+                ],
+                [
+                    "flat",
+                    "flat",
+                    "flat",
+                    "flat"
+                ]
+
+            ]
+        },
+    "triangle":
+    {
+        "mesh" : "triangle.fbx",
+        "faces" : [
+            [
+                "PointR",
+                "PointL",
+                "flat",
+                "flat"
+            ],
+            [
+                "flat",
+                "PointR",
+                "PointL",
+                "flat"
+            ],
+            [
+                "flat",
+                "flat",
+                "PointR",
+                "PointL"
+            ],
+            [
+                "PointL",
+                "flat",
+                "flat",
+                "PointR"
+            ]
+
+        ]
+    }
+}
