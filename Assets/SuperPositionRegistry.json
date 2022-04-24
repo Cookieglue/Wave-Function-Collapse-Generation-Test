@@ -2,63 +2,66 @@
     "square":
         {
             "mesh" : "Plane",
-            "faces" : [
-                [
-                    "flat",
-                    "flat",
-                    "flat",
-                    "flat"
-                ],
-                [
-                    "flat",
-                    "flat",
-                    "flat",
-                    "flat"
-                ],
-                [
-                    "flat",
-                    "flat",
-                    "flat",
-                    "flat"
-                ],
-                [
-                    "flat",
-                    "flat",
-                    "flat",
-                    "flat"
-                ]
+            "faces" : 
+                {
+                
+                    "0": {
+                        "North": "flat",
+                        "East": "flat",
+                        "South": "flat",
+                        "West": "flat"
+                    },
+                    "90": {
+                        "North": "flat",
+                        "East": "flat",
+                        "South": "flat",
+                        "West": "flat"
+                    },
+                    "180": {
+                        "North": "flat",
+                        "East": "flat",
+                        "South": "flat",
+                        "West": "flat"
+                    },
+                    "270": {
+                        "North": "flat",
+                        "East": "flat",
+                        "South": "flat",
+                        "West": "flat"
+                    } 
 
-            ]
+                }
+            
         },
     "triangle":
     {
         "mesh" : "tri",
-        "faces" : [
-            [
-                "PointR",
-                "PointL",
-                "flat",
-                "flat"
-            ],
-            [
-                "flat",
-                "PointR",
-                "PointL",
-                "flat"
-            ],
-            [
-                "flat",
-                "flat",
-                "PointR",
-                "PointL"
-            ],
-            [
-                "PointL",
-                "flat",
-                "flat",
-                "PointR"
-            ]
-
-        ]
+        "faces" : 
+            {
+                "0": {
+                    "North": "flat",
+                    "East": "PointR",
+                    "South": "PointL",
+                    "West": "flat"
+                },
+                "90": {
+                    "North": "flat",
+                    "East": "flat",
+                    "South": "PointR",
+                    "West": "PointL"
+                },
+                "180": {
+                    "North": "PointL",
+                    "East": "flat",
+                    "South": "flat",
+                    "West": "PointR"
+                },
+                "270": {
+                    "North": "PointR",
+                    "East": "PointL",
+                    "South": "flat",
+                    "West": "flat"
+                } 
+            }
     }
 }

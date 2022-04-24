@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 public class test : MonoBehaviour
 {
     // Start is called before the first frame update
+    public List<string> first;
+    public List<string> second;
     void Start()
     {
-        string json = File.ReadAllText(Application.dataPath + "/SuperPositionRegistry.json");
-        var data = JsonConvert.DeserializeObject<Dictionary<string,SuperPositionType>>(json);
-        print(data["triangle"].faces[2][3]);
+        second = first;
     }
 
 }

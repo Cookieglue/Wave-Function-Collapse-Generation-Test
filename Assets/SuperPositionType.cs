@@ -6,7 +6,7 @@ public class SuperPositionType : MonoBehaviour
 {
     
     public string mesh;
-    public string[][] faces;
+    public Dictionary<int, Dictionary<string, string>> faces;
 
 
 }
