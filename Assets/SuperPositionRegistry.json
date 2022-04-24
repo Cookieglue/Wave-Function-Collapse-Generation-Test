@@ -1,7 +1,7 @@
 {
     "square":
         {
-            "mesh" : "cube.fbx",
+            "mesh" : "Plane",
             "faces" : [
                 [
                     "flat",
@@ -32,7 +32,7 @@
         },
     "triangle":
     {
-        "mesh" : "triangle.fbx",
+        "mesh" : "tri",
         "faces" : [
             [
                 "PointR",
