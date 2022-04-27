@@ -59,7 +59,7 @@ public class DataManagement : MonoBehaviour
             }
 
         }
-        return 0;
+        return newEntropy;
 
     }
 

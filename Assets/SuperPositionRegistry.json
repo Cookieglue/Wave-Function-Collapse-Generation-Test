@@ -33,35 +33,97 @@
                 }
             
         },
-    "triangle":
+    "Slope":
     {
-        "mesh" : "tri",
+        "mesh" : "Slope",
         "faces" : 
             {
                 "0": {
-                    "North": "flat",
-                    "East": "PointR",
-                    "South": "PointL",
-                    "West": "flat"
+                    "North": "flatTall",
+                    "East": "slope",
+                    "South": "flat",
+                    "West": "slope"
                 },
                 "90": {
-                    "North": "flat",
-                    "East": "flat",
-                    "South": "PointR",
-                    "West": "PointL"
+                    "North": "slope",
+                    "East": "flatTall",
+                    "South": "slope",
+                    "West": "flat"
                 },
                 "180": {
-                    "North": "PointL",
+                    "North": "slope",
                     "East": "flat",
-                    "South": "flat",
-                    "West": "PointR"
+                    "South": "flatTall",
+                    "West": "slope"
                 },
                 "270": {
-                    "North": "PointR",
-                    "East": "PointL",
+                    "North": "slope",
+                    "East": "flat",
+                    "South": "slope",
+                    "West": "flatTall"
+                } 
+            }  
+    },
+    "slopeCorner":
+    {
+        "mesh" : "CornerSlope",
+        "faces" : 
+            {
+                "0": {
+                    "North": "slope",
+                    "East": "flat",
+                    "South": "flat",
+                    "West": "slope"
+                },
+                "90": {
+                    "North": "slope",
+                    "East": "slope",
                     "South": "flat",
                     "West": "flat"
+                },
+                "180": {
+                    "North": "flat",
+                    "East": "slope",
+                    "South": "slope",
+                    "West": "flat"
+                },
+                "270": {
+                    "North": "flat",
+                    "East": "flat",
+                    "South": "slope",
+                    "West": "slope"
                 } 
-            }
+            }  
+    },
+    "planeTall":
+    {
+        "mesh" : "TallPlane",
+        "faces" : 
+            {
+                "0": {
+                    "North": "flatTall",
+                    "East": "flatTall",
+                    "South": "flatTall",
+                    "West": "flatTall"
+                },
+                "90": {
+                    "North": "flatTall",
+                    "East": "flatTall",
+                    "South": "flatTall",
+                    "West": "flatTall"
+                },
+                "180": {
+                    "North": "flatTall",
+                    "East": "flatTall",
+                    "South": "flatTall",
+                    "West": "flatTall"
+                },
+                "270": {
+                    "North": "flatTall",
+                    "East": "flatTall",
+                    "South": "flatTall",
+                    "West": "flatTall"
+                } 
+            }  
     }
 }

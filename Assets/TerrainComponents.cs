@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,6 @@ public class TerrainComponents : MonoBehaviour
     public Dictionary<string, SuperPositionType> subSuperposition = new  Dictionary<string, SuperPositionType>(); 
     public int rotation;
     public int entropy;
-
     public int[] position;
 
     public TerrainComponents (Mesh mesh, Dictionary<string, SuperPositionType> subSuperposition, int rotation, int entropy, int[] position){

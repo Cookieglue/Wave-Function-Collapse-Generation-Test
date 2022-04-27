@@ -1,5 +1,7 @@
 {
     "flat" : "flat",
     "PointR" : "PointL",
-    "PointL" : "PointR"
+    "PointL" : "PointR",
+    "slope": "slope",
+    "flatTall": "flatTall"
 }
