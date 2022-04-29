@@ -2,6 +2,7 @@
     "flat" : "flat",
     "PointR" : "PointL",
     "PointL" : "PointR",
-    "slope": "slope",
+    "slopeRight": "slopeRight",
+    "slopeLeft": "slopeLeft",
     "flatTall": "flatTall"
 }

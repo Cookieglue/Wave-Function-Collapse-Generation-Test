@@ -33,68 +33,70 @@
                 }
             
         },
-    "Slope":
-    {
-        "mesh" : "Slope",
-        "faces" : 
-            {
-                "0": {
-                    "North": "flatTall",
-                    "East": "slope",
-                    "South": "flat",
-                    "West": "slope"
-                },
-                "90": {
-                    "North": "slope",
-                    "East": "flatTall",
-                    "South": "slope",
-                    "West": "flat"
-                },
-                "180": {
-                    "North": "slope",
-                    "East": "flat",
-                    "South": "flatTall",
-                    "West": "slope"
-                },
-                "270": {
-                    "North": "slope",
-                    "East": "flat",
-                    "South": "slope",
-                    "West": "flatTall"
-                } 
-            }  
-    },
+        "Slope":
+        {
+            "mesh" : "Slope",
+            "faces" : 
+                {
+                    "180": {
+                        "North": "flatTall",
+                        "East": "slopeRight",
+                        "South": "flat",
+                        "West": "slopeRight"
+                    },
+                    "270": {
+                        "North": "slopeRight",
+                        "East": "flatTall",
+                        "South": "slopeRight",
+                        "West": "flat"
+                    },
+                    "0": {
+                        "North": "flat",
+                        "East": "slopeLeft",
+                        "South": "flatTall",
+                        "West": "slopeLeft"
+                    },
+                    "90": {
+                        "North": "slopeLeft",
+                        "East": "flat",
+                        "South": "slopeLeft",
+                        "West": "flatTall"
+                    } 
+                }  
+        },
     "slopeCorner":
     {
         "mesh" : "CornerSlope",
         "faces" : 
             {
+        
                 "0": {
-                    "North": "slope",
-                    "East": "flat",
-                    "South": "flat",
-                    "West": "slope"
+                    "North": "flat",
+                    "East": "slopeLeft",
+                    "South": "slopeRight",
+                    "West": "flat"
                 },
                 "90": {
-                    "North": "slope",
-                    "East": "slope",
-                    "South": "flat",
-                    "West": "flat"
-                },
-                "180": {
-                    "North": "flat",
-                    "East": "slope",
-                    "South": "slope",
-                    "West": "flat"
-                },
-                "270": {
                     "North": "flat",
                     "East": "flat",
-                    "South": "slope",
-                    "West": "slope"
-                } 
+                    "South": "slopeLeft",
+                    "West": "slopeLeft"
+                },
+                "180": {
+                    "North": "slopeLeft",
+                    "East": "flat",
+                    "South": "flat",
+                    "West": "slopeRight"
+                },
+                "270": {
+                    "North": "slopeRight",
+                    "East": "slopeRight",
+                    "South": "flat",
+                    "West": "flat"
+                }
             }  
     },
+
     "planeTall":
     {
         "mesh" : "TallPlane",

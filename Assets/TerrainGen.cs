@@ -15,7 +15,7 @@ public class TerrainGen : MonoBehaviour
 {
 
     [SerializeField] private GameObject positionObject;
-    [SerializeField] private int chunkSize = 15;
+    [SerializeField] private int chunkSize = 20;
     private MeshFilter meshFilter;
     private Mesh mesh;
     private System.Random rand = new System.Random();
@@ -44,19 +44,28 @@ TerrainComponents comp;
         JsonSetup();
         InitializeChunk();
 
-        int netEntropy = 1;
-        while (netEntropy > 0){
+        RandElement();
+        CollapseWave();
 
+
+        
+    }
+    void Update()
+    {
+        if(Input.GetMouseButton(0)){
+        int netEntropy = 1;
+        
+            UpdateEntropy();
+            terrainComponents = DataManagement.InsertionSortCells(terrainComponents);
             netEntropy = 0;
             CollapseWave();
-            terrainComponents = DataManagement.InsertionSortCells(terrainComponents);
             netEntropy = DataManagement.getNetEntropy(terrainComponents);
 
 
-        }
-
-        transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
         
+
+        }
+        transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
     }
     void InitializeChunk(){
 
@@ -85,13 +94,13 @@ TerrainComponents comp;
     }
     void CollapseWave(){
 
+        try{
         int random = rand.Next(0, terrainComponents[0].subSuperposition.Count);
         //load mesh randomly from possible states
-        try{
         SuperPositionType meshPath = 
         terrainComponents[0].subSuperposition.ElementAt(random).Value;
         
-        
+
         //set mesh
         terrainComponents[0].mesh = meshes[meshPath.mesh];
         //get random possible faces, and find the key which will be the rotation
@@ -109,9 +118,9 @@ TerrainComponents comp;
             
         }
         //Down
-        if (position[1]+1 < chunkSize && tempGameobjects[position[0]][position[1]+1] != null){
+        if (position[1]-1 > 0 && tempGameobjects[position[0]][position[1]-1] != null){
 
-            TerrainComponents down = tempGameobjects[position[0]][position[1]+1].GetComponent<TerrainComponents>();
+            TerrainComponents down = tempGameobjects[position[0]][position[1]-1].GetComponent<TerrainComponents>();
             EliminateEntropy(down.subSuperposition, "North", meshPath.faces[rot]["South"]);
             down.entropy = DataManagement.recalculateEntropy( down.subSuperposition);
             
@@ -125,15 +134,14 @@ TerrainComponents comp;
             
         }
         //Up
-        if (position[1]-1 > 0 && tempGameobjects[position[0]][position[1]-1] != null){
+        if (position[1]+1 < chunkSize && tempGameobjects[position[0]][position[1]+1] != null){
 
-            TerrainComponents up = tempGameobjects[position[0]][position[1]-1].GetComponent<TerrainComponents>();
+            TerrainComponents up = tempGameobjects[position[0]][position[1]+1].GetComponent<TerrainComponents>();
             EliminateEntropy(up.subSuperposition, "South", meshPath.faces[rot]["North"]);
             up.entropy = DataManagement.recalculateEntropy( up.subSuperposition);
             
         }
         MergeMeshes(position);
-
         }
         catch{}
         terrainComponents.RemoveAt(0);
@@ -141,6 +149,14 @@ TerrainComponents comp;
 
     }
 
+    void RandElement(){
+
+        TerrainComponents key = terrainComponents[0];
+        int keyNum = rand.Next(0, terrainComponents.Count);
+        terrainComponents[0] = terrainComponents[keyNum];
+        terrainComponents[keyNum] = key;
+
+    }
     void JsonSetup(){
 
         //load jsons
@@ -164,7 +180,13 @@ TerrainComponents comp;
 
     }
 
+    void UpdateEntropy(){
 
+        foreach (TerrainComponents comp in terrainComponents){
+            comp.entropy = DataManagement.recalculateEntropy(comp.subSuperposition);
+        }
+
+    }
     void EliminateEntropy(Dictionary<string, SuperPositionType> input, string direction, string socket){
         
         foreach (KeyValuePair<string, SuperPositionType> superPositionType in input.ToList()){
